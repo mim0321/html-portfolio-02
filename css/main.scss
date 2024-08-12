@@ -1,0 +1,250 @@
+@use "reset";
+// 변수 지정
+$mainColor: #4b4dc8;
+$bgColor: #f9f9f9;
+$icoColor: #757575;
+$baseTime: 0.4s;
+$boxShadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.1);
+
+// 임시클래스
+%box-title {
+  background-color: $bgColor;
+  padding: 16px 24px;
+  border-bottom: 1px solid lightgray;
+}
+
+body {
+  background-color: $bgColor;
+}
+
+//
+// -- Side Bar --
+.body-content {
+  margin-left: 60px;
+}
+
+.sidebar {
+  width: 160px;
+  height: 100vh;
+  background-color: $mainColor;
+  position: fixed;
+  z-index: 5;
+  color: #fff;
+  transform: translateX(-100px);
+  transition: transform $baseTime;
+
+  ul {
+    margin-top: 30px;
+  }
+
+  li {
+    transition: transform ($baseTime - 0.2s);
+  }
+
+  li:hover {
+    transform: translateX(10px);
+  }
+}
+
+.sidebar:hover {
+  transform: translateX(0);
+
+  i,
+  span {
+    transform: translateX(0);
+  }
+
+  span {
+    opacity: 1;
+  }
+}
+
+.sidebar__ico-con {
+  > a {
+    display: block;
+    margin-top: 24px;
+    padding-left: 24px;
+  }
+
+  i {
+    transition: transform $baseTime;
+    transform: translateX(96px);
+  }
+
+  span {
+    transition: transform $baseTime, opacity ($baseTime) ($baseTime - 0.2s);
+    padding-left: 10px;
+    display: inline-block;
+    transform: translateX(-160px);
+    opacity: 0;
+  }
+}
+
+// 
+// -- HEADER, Nav Bar --
+.header > .navbar {
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.1);
+
+  .header__ico {
+    color: $icoColor;
+  }
+
+  .header__ico:focus {
+    color: #333;
+  }
+}
+
+.header__searchbox {
+  border-radius: 5px 0 0 5px;
+  transition: width ($baseTime * 2);
+
+  &:focus {
+    width: 500px;
+  }
+}
+
+.header__searchico {
+  border-radius: 0 5px 5px 0;
+}
+
+//
+// -- Dash Board --
+.dashboard__card-shadow {
+  width: 100%;
+  min-width: 220px;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-shadow: $boxShadow;
+}
+
+.dashboard__card-box {
+  margin-left: auto;
+  background-color: #fff;
+  width: 98%;
+  padding: 20px 20px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $icoColor;
+}
+
+.dashboard__text {
+  p:nth-child(2) {
+    color: #333;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+}
+
+.dashboard__ico {
+  i {
+    font-size: 1.6rem;
+  }
+}
+
+//
+// -- Earnings Overview --
+.overview__chart-box {
+  margin-top: 40px;
+  background-color: #fff;
+  box-shadow: $boxShadow;
+  border-radius: 5px;
+  overflow: hidden;
+
+  p {
+    @extend %box-title;
+  }
+
+  canvas {
+    padding: 20px;
+  }
+}
+
+//
+// -- Tasks --
+.overview__tasks-box {
+  margin-top: 40px;
+  box-shadow: $boxShadow;
+  border-radius: 5px;
+  overflow: hidden;
+
+  p {
+    @extend %box-title;
+  }
+}
+
+.overview__tasks-list {
+  background-color: #fff;
+
+  li {
+    padding: 16px 24px;
+  }
+
+  li:not(:last-of-type) {
+    border-bottom: 1px solid lightgray;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+    float: none;
+  }
+
+  .notification-ico {
+    float: right;
+    color: #fff;
+    font-size: 0.8rem;
+    background-color: #46a8ff;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  // Header
+  .header__searchbar {
+    margin-top: 20px;
+  }
+
+  .header__searchbox:focus {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  // Side Bar
+  .body-content {
+    margin-left: 40px;
+  }
+
+  .sidebar {
+    transform: translateX(-120px);
+    font-size: 0.9rem;
+
+    li:active {
+        transform: translateX(10px);
+      }
+  }
+
+  .sidebar__ico-con {
+    i {
+      transform: translateX(106px);
+    }
+  }
+
+  .sidebar:active {
+    transform: translateX(0);
+  
+    i,
+    span {
+      transform: translateX(0);
+    }
+  
+    span {
+      opacity: 1;
+    }
+  }
+}
